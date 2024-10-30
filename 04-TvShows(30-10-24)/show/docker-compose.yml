@@ -1,0 +1,35 @@
+version: '3'
+services:
+ 
+  mysql:
+    image: mysql:latest
+    container_name: rev_sql
+    ports:
+      - "3304:3306"
+    networks:
+      - rev_network
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: revshop_docker
+
+
+  
+  show-service:
+    image: show-service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: show_backend
+    depends_on:
+      - mysql
+    ports:
+      - "7070:7070"
+    networks:
+      - rev_network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://rev_sql:3306/revshop_docker
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+networks:
+  rev_network:

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show Details</title>
+</head>
+<body>
+    <h1 th:text="${show.title}">Show Title</h1>
+    <p><strong>Premiers On:</strong> <span th:text="${show.premiered}"></span></p>
+    <p><strong>Genres:</strong> <span th:text="${show.genres}"></span></p>
+    <p><strong>Synopsis:</strong> <span th:text="${show.summary}"></span></p>
+    <a th:href="@{/shows/{id}/edit(id=${show.id})}">Edit</a> |
+    <a th:href="@{/shows}">Back to Collection</a>
+</body>
+</html>
